@@ -57,14 +57,13 @@ class DigitizedImage:
         image.putdata(values)
         return image
 
-    def binarize(self, window: Rect, histogram: Histogram):
+    def binarize(self, window: Rect, value: int):
         self.__validate_window(window)
-        max_value = histogram.get_max_value()
         values = []
         for row in range(window.height):
             for col in range(window.width):
                 index = (row + window.top + self.edgeInsets.top) * self.__real_width + col + window.left + self.edgeInsets.left
-                if self.__data[index] >= max_value:
+                if self.__data[index] >= value:
                     values.append(255)
                 else:
                     values.append(0)
